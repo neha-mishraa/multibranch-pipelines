@@ -1,0 +1,43 @@
+resources:
+  - name: mb1
+    type: GitRepo
+    configuration:
+      path: bharath92/multibranch-pipelines
+      gitProvider: bharath_github
+      branches:
+        include: ^{{gitBranch}}$
+  - name: mb2
+    type: GitRepo
+    configuration:
+      path: bharath92/multibranch-pipelines
+      gitProvider: bharath_github
+      branches:
+        include: ^{{gitBranch}}$
+      files:
+        include: \btestdir\/file1\b
+
+pipelines:
+  - name: check1
+    steps:
+      - name: basic
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          inputResources:
+            - name: mb1
+        execution:
+          onExecute:
+            - echo hi
+  - name: check2
+    steps:
+      - name: basic
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          inputResources:
+            - name: mb2
+        execution:
+          onExecute:
+            - echo hi

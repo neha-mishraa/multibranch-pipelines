@@ -17,7 +17,7 @@ resources:
         include: \btestdir\/file1\b
 
 pipelines:
-  - name: check1
+  - name: mbcheck1
     steps:
       - name: basic
         type: Bash
@@ -29,7 +29,7 @@ pipelines:
         execution:
           onExecute:
             - echo hi
-  - name: check2
+  - name: mbcheck2
     steps:
       - name: basic
         type: Bash

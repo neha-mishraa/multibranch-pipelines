@@ -40,4 +40,4 @@ pipelines:
             - name: mb2
         execution:
           onExecute:
-            - echo hi
+            - echo hii

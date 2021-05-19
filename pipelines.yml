@@ -3,14 +3,14 @@ resources:
     type: GitRepo
     configuration:
       path: bharath92/multibranch-pipelines
-      gitProvider: bharath_github
+      gitProvider: github
       branches:
         include: ^{{gitBranch}}$
   - name: mb2
     type: GitRepo
     configuration:
       path: bharath92/multibranch-pipelines
-      gitProvider: bharath_github
+      gitProvider: github
       branches:
         include: ^{{gitBranch}}$
       files:
@@ -34,8 +34,8 @@ pipelines:
       - name: basic
         type: Bash
         configuration:
-          runtime:
-            type: host
+#           runtime:
+#             type: host
           inputResources:
             - name: mb2
         execution:

@@ -6,7 +6,7 @@ resources:
   - name: monitor_cron_trigger{{$i}}
     type: CronTrigger
     configuration:
-      interval: '*/5 * * * *' # Every 5 minutes
+      interval: '0 12 * * *' # Every 5 minutes
   {{ end }}
 
 pipelines:

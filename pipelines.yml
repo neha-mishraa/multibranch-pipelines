@@ -2,13 +2,12 @@ template: true
 valuesFilePath: ./values.yml
 
 resources:
-  - name: testcron
-    type: GitRepo
+  {{ range $i, $e := until 5 }}
+  - name: monitor_cron_trigger{{$i}}
+    type: CronTrigger
     configuration:
-      path: bharath92/multibranch-pipelines
-      gitProvider: github
-      branches:
-        include: ^{{gitBranch}}$
+      interval: '*/5 * * * *' # Every 5 minutes
+  {{ end }}
 
 pipelines:
   - name: testcron
@@ -18,12 +17,10 @@ pipelines:
         configuration:
           runtime:
             type: host
-          {{ if contains "{{gitBranch}}" "main1" }}
           inputResources:
-            - name: mb1
+          {{ range $i, $e := until 5 }}
+            - name: monitor_cron_trigger{{$i}}
           {{ end }}
         execution:
           onExecute:
-            {{range $i, $e := until 5}}
-            - echo hi{{$i}}
-            {{end}}
+            - echo hi

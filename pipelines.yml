@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ./values.yml
 
 resources:
-  {{ range $i, $e := until 5 }}
+  {{ range $i, $e := until 1500 }}
   - name: monitor_cron_trigger{{$i}}
     type: CronTrigger
     configuration:
@@ -18,7 +18,7 @@ pipelines:
           runtime:
             type: host
           inputResources:
-          {{ range $i, $e := until 5 }}
+          {{ range $i, $e := until 1500 }}
             - name: monitor_cron_trigger{{$i}}
           {{ end }}
         execution:

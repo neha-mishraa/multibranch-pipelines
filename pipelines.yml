@@ -6,8 +6,12 @@ resources:
   - name: monitor_cron_trigger_{{$i}}
     type: CronTrigger
     configuration:
-      interval: '0 12 * * *' # every 12 noon
+      interval: '0 12 * * *' # 12 PM (noon) every day
   {{ end }}
+  - name: cron_trigger
+    type: CronTrigger
+    configuration:
+      interval: '*/5 * * * *' # Every 5 minutes
 
 pipelines:
   - name: testcron_
@@ -21,6 +25,7 @@ pipelines:
           {{ range $i, $e := until 1500 }}
             - name: monitor_cron_trigger_{{$i}}
           {{ end }}
+            - name: cron_trigger
         execution:
           onExecute:
             - echo hi

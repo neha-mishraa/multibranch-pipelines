@@ -1,45 +1,45 @@
-template: true
-valuesFilePath: ./values.yml
+# template: true
+# valuesFilePath: ./values.yml
 
-resources:
-  {{ range $i, $e := until 500 }}
-  - name: cr{{$i}}
-    type: CronTrigger
-    configuration:
-      interval: '0 12 * * *' # 12 PM (noon) every day
-  {{ end }}
-  - name: crr
-    type: CronTrigger
-    configuration:
-      interval: '*/5 * * * *' # Every 5 minutes
+# resources:
+#   {{ range $i, $e := until 500 }}
+#   - name: cr{{$i}}
+#     type: CronTrigger
+#     configuration:
+#       interval: '0 12 * * *' # 12 PM (noon) every day
+#   {{ end }}
+#   - name: crr
+#     type: CronTrigger
+#     configuration:
+#       interval: '*/5 * * * *' # Every 5 minutes
 
-pipelines:
-  {{ range $i, $e := until 500 }}
-  - name: testcron_{{$i}}
-    steps:
-      - name: basic
-        type: Bash
-        configuration:
-          runtime:
-            type: host
-          inputResources:
-            - name: cr{{$i}}
-        execution:
-          onExecute:
-            - echo hi
-  {{ end }}
-  - name: testcron_basic
-    steps:
-      - name: basictest
-        type: Bash
-        configuration:
-          runtime:
-            type: host
-          inputResources:
-            - name: crr
-        execution:
-          onExecute: 
-            - echo hi
+# pipelines:
+#   {{ range $i, $e := until 500 }}
+#   - name: testcron_{{$i}}
+#     steps:
+#       - name: basic
+#         type: Bash
+#         configuration:
+#           runtime:
+#             type: host
+#           inputResources:
+#             - name: cr{{$i}}
+#         execution:
+#           onExecute:
+#             - echo hi
+#   {{ end }}
+#   - name: testcron_basic
+#     steps:
+#       - name: basictest
+#         type: Bash
+#         configuration:
+#           runtime:
+#             type: host
+#           inputResources:
+#             - name: crr
+#         execution:
+#           onExecute: 
+#             - echo hi
 
 # template: true
 # valuesFilePath: ./values.yml

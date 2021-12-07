@@ -10,7 +10,7 @@ resources:
   {{ end }}
 
 pipelines:
-  - name: testcron
+  - name: testcron_
     steps:
       - name: basic
         type: Bash

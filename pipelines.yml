@@ -3,12 +3,12 @@ valuesFilePath: ./values.yml
 
 resources:
   {{ range $i, $e := until 1500 }}
-  - name: monitor_cron_trigger_{{$i}}
+  - name: cr{{$i}}
     type: CronTrigger
     configuration:
       interval: '0 12 * * *' # 12 PM (noon) every day
   {{ end }}
-  - name: cron_trigger
+  - name: crr
     type: CronTrigger
     configuration:
       interval: '*/5 * * * *' # Every 5 minutes
@@ -23,9 +23,9 @@ pipelines:
             type: host
           inputResources:
           {{ range $i, $e := until 1500 }}
-            - name: monitor_cron_trigger_{{$i}}
+            - name: cr{{$i}}
           {{ end }}
-            - name: cron_trigger
+            - name: crr
         execution:
           onExecute:
             - echo hi

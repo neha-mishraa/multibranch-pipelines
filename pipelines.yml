@@ -24,7 +24,6 @@ pipelines:
             type: host
           inputResources:
             - name: cr{{$i}}
-            - name: crr
         execution:
           onExecute:
             - echo hi

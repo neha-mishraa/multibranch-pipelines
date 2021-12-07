@@ -3,7 +3,7 @@ valuesFilePath: ./values.yml
 
 resources:
   {{ range $i, $e := until 1500 }}
-  - name: monitor_cron_trigger{{$i}}
+  - name: monitor_cron_trigger_{{$i}}
     type: CronTrigger
     configuration:
       interval: '0 12 * * *' # every 12 noon
@@ -19,7 +19,7 @@ pipelines:
             type: host
           inputResources:
           {{ range $i, $e := until 1500 }}
-            - name: monitor_cron_trigger{{$i}}
+            - name: monitor_cron_trigger_{{$i}}
           {{ end }}
         execution:
           onExecute:
